@@ -12,7 +12,7 @@ int main()
 	{
 		for (int s = 0; s < (height - h); s++)
 		{
-			cout << "0";
+			cout << " ";
 		}
 		for (int ch = 0; ch <= h; ch++)
 		{
