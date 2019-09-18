@@ -1,15 +1,25 @@
-#include <iostream>
+#include <cmath>
 #include <cstring>
+#include <iostream>
 
-using std::cout,
-std::cin,
-std::endl;
+using std::cout;
+using std::cin;
+using std::endl;
 
-char charDigits[10] =
+const int DIGITS_NUMBER = 10;
+char charDigits[DIGITS_NUMBER] =
 {
-	'0', '2', '3',
-	'4', '5', '6',
-	'7', '8', '9'
+	'0', '1', '2', '3', '4',
+	'5', '6', '7', '8', '9'
+};
+
+const int LEGAL_CHARS_NUMBER = 11;
+char legalChars[LEGAL_CHARS_NUMBER] =
+{
+	'0', '1', '2', '3',
+	'4', '5', '6', '7',
+	'8', '9', '.'
+
 };
 
 float getFloat()
@@ -23,29 +33,68 @@ float getFloat()
 	
 	for (int i = 0; i < LENGTH; i++)
 	{
+		bool isCharValid = false;
+		for (int l = 0; l < LEGAL_CHARS_NUMBER; l++)
+		{
+			if (buffer[i] == legalChars[l])
+			{
+				isCharValid = true;
+			}
+		}
+
+		if (buffer[i] == ' ' && buffer[i + 1] != ' ')
+		{
+			cout << "Detected useless space, try entering value again" << endl;
+			cin.getline(buffer, LENGTH);
+			i = 0;
+		}
+		else
+		{
+			continue;
+		}
+		
+		if (!isCharValid)
+		{
+			cout << "Illegal character [" << buffer[i] << "] detected at position " << i << endl;
+			cout << "Enter another value" << endl;
+			cin.getline(buffer, LENGTH);
+			i = 0;
+		}
+	}
+
+	for (int i = 0; i < LENGTH; i++)
+	{
 		if (buffer[i] == '.')
 		{
 			dotIndex = i;
+			break;
 		}
 	}
+	cout << "Dot index is: " << dotIndex << endl;
 	
 	for (int i = 0; i < dotIndex; i++)
 	{
-		int decPower = dotIndex - i;
+		int decPower = dotIndex - (i + 1);
 		bool isDigit = false;
 		
-		for (int c = 0; c < 10; c++)
+		cout << "Got character [" << buffer[i] << "]" << endl;
+		for (int c = 0; c < DIGITS_NUMBER; c++)
 		{
-			if (buffer[i] == digits[c])
+			if (buffer[i] == charDigits[c])
 			{
 				isDigit = true;
+				cout << "Character [" << buffer[i] << "] is digit [" << ((int)buffer[i] - (int)'0') << "]" << endl;
 			}
 		}
 		
 		if (isDigit)
 		{
-			value += (int)buffer[i] * pow(10, decPower);
+			float digitValue = ((int)buffer[i] - (int)'0') * pow(10, decPower);
+			value += digitValue;
+		}
 	}
+
+	return value;
 }
 
 int main()
