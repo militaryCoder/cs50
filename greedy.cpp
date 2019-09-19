@@ -24,7 +24,7 @@ char legalChars[LEGAL_CHARS_NUMBER] =
 
 float getFloat()
 {
-	float value = 0;
+	float finalValue = 0;
 	
 	const int LENGTH = 16;
 	char buffer[LENGTH];
@@ -74,6 +74,11 @@ float getFloat()
 	
 	for (int i = 0; i < dotIndex; i++)
 	{
+		cout << "---------- " << i << endl;
+		if (buffer[i] == ' ')
+		{
+			continue;
+		}
 		int decPower = dotIndex - (i + 1);
 		bool isDigit = false;
 		
@@ -90,15 +95,40 @@ float getFloat()
 		if (isDigit)
 		{
 			float digitValue = ((int)buffer[i] - (int)'0') * pow(10, decPower);
-			value += digitValue;
+			finalValue += digitValue;
+		}
+	}
+	
+	for (int i = (dotIndex + 1); i < LENGTH; i++)
+	{
+		if (buffer[i] == ' ')
+		{
+			continue;
+		}
+		
+		float decPower = dotIndex - i;
+		
+		bool isDigit = false;
+		for (int c = 0; c < DIGITS_NUMBER; c++)
+		{
+			if (buffer[i] == charDigits[c])
+			{
+				isDigit = true;
+			}
+		}
+		
+		if (isDigit)
+		{
+			float digitValue = ((int)buffer[i] - (int)'0') * pow(10, decPower);
+			finalValue += digitValue;
 		}
 	}
 
-	return value;
+	return finalValue;
 }
 
 int main()
 {
-	getFloat();
+	cout << getFloat();
 	return 0;
 }
