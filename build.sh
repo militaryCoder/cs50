@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "enter file name is needed to compile"
 read BUILD_TARGET
 echo "building ${BUILD_TARGET} ..."
 
