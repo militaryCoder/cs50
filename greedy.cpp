@@ -5,6 +5,7 @@
 using std::cout;
 using std::cin;
 using std::endl;
+using std::string;
 
 const int DIGITS_NUMBER = 10;
 char charDigits[DIGITS_NUMBER] =
@@ -27,9 +28,9 @@ float getFloat()
 	float finalValue = 0;
 	
 	const int LENGTH = 16;
-	char buffer[LENGTH];
-	cin.getline(buffer, LENGTH);
-	int dotIndex = LENGTH;
+	string buffer;
+	getline(cin, buffer);
+	int dotIndex;
 	
 	for (int i = 0; i < LENGTH; i++)
 	{
@@ -45,7 +46,7 @@ float getFloat()
 		if (buffer[i] == ' ' && buffer[i + 1] != ' ')
 		{
 			cout << "Detected useless space, try entering value again" << endl;
-			cin.getline(buffer, LENGTH);
+			getline(cin, buffer);
 			i = 0;
 		}
 		else
@@ -57,7 +58,7 @@ float getFloat()
 		{
 			cout << "Illegal character [" << buffer[i] << "] detected at position " << i << endl;
 			cout << "Enter another value" << endl;
-			cin.getline(buffer, LENGTH);
+			getline(cin, buffer);
 			i = 0;
 		}
 	}
