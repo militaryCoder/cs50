@@ -1,69 +1,42 @@
 #include <cmath>
 #include <cstring>
 #include <iostream>
+#include <regex>
 
 using std::cout;
 using std::cin;
 using std::endl;
-using std::string;
-
-const int DIGITS_NUMBER = 10;
-char charDigits[DIGITS_NUMBER] =
-{
-	'0', '1', '2', '3', '4',
-	'5', '6', '7', '8', '9'
-};
-
-const int LEGAL_CHARS_NUMBER = 11;
-char legalChars[LEGAL_CHARS_NUMBER] =
-{
-	'0', '1', '2', '3',
-	'4', '5', '6', '7',
-	'8', '9', '.'
-
-};
+using std::regex;
 
 float getFloat()
 {
 	float finalValue = 0;
 	
-	const int LENGTH = 16;
-	string buffer;
-	getline(cin, buffer);
-	int dotIndex;
-	
-	for (int i = 0; i < LENGTH; i++)
-	{
-		bool isCharValid = false;
-		for (int l = 0; l < LEGAL_CHARS_NUMBER; l++)
-		{
-			if (buffer[i] == legalChars[l])
-			{
-				isCharValid = true;
-			}
-		}
+	std::string buffer;
+		
+	bool isValueFormatCorrect = false;
+	regex* correctValueFormat = new regex("[\\d]+\\.[\\d]+");
 
-		if (buffer[i] == ' ' && buffer[i + 1] != ' ')
+	do
+	{
+		getline(cin, buffer);
+		isValueFormatCorrect = std::regex_match(buffer, *correctValueFormat);
+		
+		if (isValueFormatCorrect)
 		{
-			cout << "Detected useless space, try entering value again" << endl;
-			getline(cin, buffer);
-			i = 0;
+			cout << "Format correct" << endl;
 		}
 		else
 		{
-			continue;
+			cout << "Format incorrect, please try again" << endl;
 		}
-		
-		if (!isCharValid)
-		{
-			cout << "Illegal character [" << buffer[i] << "] detected at position " << i << endl;
-			cout << "Enter another value" << endl;
-			getline(cin, buffer);
-			i = 0;
-		}
-	}
+	} while (!isValueFormatCorrect);
 
-	for (int i = 0; i < LENGTH; i++)
+	delete correctValueFormat;
+	correctValueFormat = nullptr;
+
+	int dotIndex;	
+	for (int i = 0; i < buffer.size(); i++)
 	{
 		if (buffer[i] == '.')
 		{
@@ -76,31 +49,28 @@ float getFloat()
 	for (int i = 0; i < dotIndex; i++)
 	{
 		cout << "---------- " << i << endl;
-		if (buffer[i] == ' ')
-		{
-			continue;
-		}
+
 		int decPower = dotIndex - (i + 1);
 		bool isDigit = false;
 		
 		cout << "Got character [" << buffer[i] << "]" << endl;
-		for (int c = 0; c < DIGITS_NUMBER; c++)
-		{
-			if (buffer[i] == charDigits[c])
-			{
-				isDigit = true;
-				cout << "Character [" << buffer[i] << "] is digit [" << ((int)buffer[i] - (int)'0') << "]" << endl;
-			}
-		}
 		
+		regex* digits = new regex("\\d");
+		isDigit = std::regex_match(std::string(1, buffer[i]), *digits);
+
+		delete digits;
+		digits = nullptr;
+
 		if (isDigit)
 		{
+			cout << "Character [" << buffer[i] << "] is digit [" << ((int)buffer[i] - (int)'0') << "]" << endl;
+
 			float digitValue = ((int)buffer[i] - (int)'0') * pow(10, decPower);
 			finalValue += digitValue;
 		}
 	}
 	
-	for (int i = (dotIndex + 1); i < LENGTH; i++)
+	for (int i = (dotIndex + 1); i < buffer.size(); i++)
 	{
 		if (buffer[i] == ' ')
 		{
@@ -110,16 +80,17 @@ float getFloat()
 		float decPower = dotIndex - i;
 		
 		bool isDigit = false;
-		for (int c = 0; c < DIGITS_NUMBER; c++)
-		{
-			if (buffer[i] == charDigits[c])
-			{
-				isDigit = true;
-			}
-		}
+
+		regex* digits = new regex("\\d");
+		isDigit = std::regex_match(std::string(1, buffer[i]), *digits);
+
+		delete digits;
+		digits = nullptr;
 		
 		if (isDigit)
 		{
+			cout << "Character [" << buffer[i] << "] is digit [" << ((int)buffer[i] - (int)'0') << "]" << endl;
+
 			float digitValue = ((int)buffer[i] - (int)'0') * pow(10, decPower);
 			finalValue += digitValue;
 		}
@@ -130,6 +101,6 @@ float getFloat()
 
 int main()
 {
-	cout << getFloat();
+	cout << getFloat() << endl;
 	return 0;
 }
