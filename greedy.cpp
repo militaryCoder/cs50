@@ -15,7 +15,7 @@ float getFloat()
 	std::string buffer;
 		
 	bool isValueFormatCorrect = false;
-	regex* correctValueFormat = new regex("[\\d]+\\.[\\d]+");
+	regex* correctValueFormat = new regex("[\\d]+[\\.]?[\\d]{0,2}");
 
 	do
 	{
@@ -44,17 +44,12 @@ float getFloat()
 			break;
 		}
 	}
-	cout << "Dot index is: " << dotIndex << endl;
 	
 	for (int i = 0; i < dotIndex; i++)
 	{
-		cout << "---------- " << i << endl;
-
 		int decPower = dotIndex - (i + 1);
 		bool isDigit = false;
-		
-		cout << "Got character [" << buffer[i] << "]" << endl;
-		
+
 		regex* digits = new regex("\\d");
 		isDigit = std::regex_match(std::string(1, buffer[i]), *digits);
 
@@ -63,8 +58,6 @@ float getFloat()
 
 		if (isDigit)
 		{
-			cout << "Character [" << buffer[i] << "] is digit [" << ((int)buffer[i] - (int)'0') << "]" << endl;
-
 			float digitValue = ((int)buffer[i] - (int)'0') * pow(10, decPower);
 			finalValue += digitValue;
 		}
@@ -89,8 +82,6 @@ float getFloat()
 		
 		if (isDigit)
 		{
-			cout << "Character [" << buffer[i] << "] is digit [" << ((int)buffer[i] - (int)'0') << "]" << endl;
-
 			float digitValue = ((int)buffer[i] - (int)'0') * pow(10, decPower);
 			finalValue += digitValue;
 		}
@@ -101,6 +92,29 @@ float getFloat()
 
 int main()
 {
-	cout << getFloat() << endl;
+	const int coins[4] = { 1, 5, 10, 25 };
+	
+	float input = getFloat();
+	int cents = input * 100;
+	
+	int totalCoins = 0;
+	while (cents != 0)
+	{
+		int n = cents / coins[0];
+		int currentCoinValue = 0;
+		for (int c = 1; c < 4; c++)
+		{
+			if ((cents / coins[c]) < n
+				&& (cents / coins[c]) > 0)
+			{
+				n = cents / coins[c];
+				currentCoinValue = c;
+			}
+			
+		}
+		totalCoins += n;
+		cents -= coins[currentCoinValue] * n;
+	}
+	cout << totalCoins << endl;
 	return 0;
 }
