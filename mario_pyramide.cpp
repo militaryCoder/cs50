@@ -6,7 +6,8 @@ int main()
 	std::cin >> height;
 	for (uint32_t h = 0; h < height; h++)
 	{
-		const uint32_t spacesToPrintNumber = height - h; 
+		const uint32_t spacesToPrintNumber = height - h;
+		 
 		for (uint32_t s = spacesToPrintNumber; s > 0; s--)
 		{
 			std::cout << " ";
