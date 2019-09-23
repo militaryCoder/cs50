@@ -1,24 +1,21 @@
 #include <iostream>
 
-using std::cin,
-std::cout,
-std::endl;
-
 int main()
 {
-	int height;
-	cin >> height;
-	for (int h = 0; h < height; h++)
+	uint32_t height;
+	std::cin >> height;
+	for (uint32_t h = 0; h < height; h++)
 	{
-		for (int s = 0; s < (height - h); s++)
+		const uint32_t spacesToPrintNumber = height - h; 
+		for (uint32_t s = spacesToPrintNumber; s > 0; s--)
 		{
-			cout << " ";
+			std::cout << " ";
 		}
-		for (int ch = 0; ch <= h; ch++)
+		for (uint32_t ch = 0; ch <= h; ch++)
 		{
-			cout << "#";
+			std::cout << "#";
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 	return 0;
 }
