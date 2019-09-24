@@ -89,7 +89,7 @@ int main()
     }
     catch (const std::invalid_argument &invalidArgumentException)
     {
-        std::cout << "User entered invalid value" << std::endl;
+        std::cout << invalidArgumentException.what();
     }
     
     return 0;
