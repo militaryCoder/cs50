@@ -49,7 +49,7 @@ float parseFloat(const std::string &buffer)
 int main()
 {
     const uint32_t nominalsCount = 4;
-    const int coinsNominals[nominalsCount] = { 1, 5, 10, 25 };
+    const uint32_t coinsNominals[nominalsCount] = { 1, 5, 10, 25 };
     
     try
     {
@@ -84,7 +84,7 @@ int main()
 
         std::cout << totalCoins << std::endl;
     }
-    catch (std::invalid_argument &invalidArgumentException)
+    catch (const std::invalid_argument &invalidArgumentException)
     {
         std::cout << "User entered invalid value" << std::endl;
     }
