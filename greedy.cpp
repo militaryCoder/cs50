@@ -8,7 +8,7 @@ const uint32_t DECIMAL_POWER_BASE = 10u;
 
 static inline uint8_t charToInteger(const char value)
 {
-    if (value <= '0' && value >= '9')
+    if (value <= '0' || value >= '9')
     {
         throw std::out_of_range("Invalid character");
     }
@@ -48,7 +48,8 @@ float parseFloat(const std::string &buffer)
 
 int main()
 {
-    const int coinsNominals[4] = { 1, 5, 10, 25 };
+    const uint32_t nominalsCount = 4;
+    const int coinsNominals[nominalsCount] = { 1, 5, 10, 25 };
     
     try
     {
@@ -65,7 +66,7 @@ int main()
             int numberOfCoins = cents / coinsNominals[0];
             int currentCoinIndex = 0;
 
-            for (int c = 1; c < 4; c++)
+            for (int c = 1; c < nominalsCount; c++)
             {
                 const int numberOfNominatedCoins = cents / coinsNominals[c];
 
