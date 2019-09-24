@@ -12,7 +12,7 @@ int main()
         {
             if (character == inputName[i])
             {
-                std::cout << character;
+                std::cout << (char)character;
             }
         }
     }
