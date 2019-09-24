@@ -6,7 +6,7 @@
 
 const uint32_t DECIMAL_POWER_BASE = 10u;
 
-uint8_t charToInteger(char value)
+static inline uint8_t charToInteger(const char value)
 {
     if (value <= '0' && value >= '9')
     {
@@ -16,26 +16,11 @@ uint8_t charToInteger(char value)
     return (value - '0');
 }
 
-float parseFloat(std::string buffer)
+float parseFloat(const std::string &buffer)
 {
     float finalValue = 0;
     
     std::regex correctValueFormat(R"(\d+(\.\d+)?)");
-
-    // do
-    // {
-    // 	getline(cin, buffer);
-    // 	isValueFormatCorrect = std::regex_match(buffer, *correctValueFormat);
-        
-    // 	if (isValueFormatCorrect)
-    // 	{
-    // 		cout << "Format correct" << endl;
-    // 	}
-    // 	else
-    // 	{
-    // 		cout << "Format incorrect, please try again" << endl;
-    // 	}
-    // } while (!isValueFormatCorrect);
 
     if (!std::regex_match(buffer, correctValueFormat))
     {
@@ -82,10 +67,12 @@ int main()
 
             for (int c = 1; c < 4; c++)
             {
-                if ((cents / coinsNominals[c]) < numberOfCoins &&
-                    (cents / coinsNominals[c]) > 0)
+                const int numberOfNominatedCoins = cents / coinsNominals[c];
+
+                if ((numberOfNominatedCoins) < numberOfCoins &&
+                    (numberOfNominatedCoins) > 0)
                 {
-                    numberOfCoins = cents / coinsNominals[c];
+                    numberOfCoins = numberOfNominatedCoins;
                     currentCoinIndex = c;
                 }
             }

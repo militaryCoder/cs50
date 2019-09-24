@@ -1,14 +1,10 @@
 #include <iostream>
 
-using std::cout,
-std::cin,
-std::endl;
-
 int main()
 {
-	cout << "waterminutes: ";
+	std::cout << "waterminutes: ";
 	int waterminutes;
-	cin >> waterminutes;
-	cout << "bottles: " << waterminutes * 12 << endl;
+	std::cin >> waterminutes;
+	std::cout << "bottles: " << waterminutes * 12 << std::endl;
 	return 0;
 }

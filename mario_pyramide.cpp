@@ -1,24 +1,20 @@
 #include <iostream>
 
-using std::cin,
-std::cout,
-std::endl;
-
 int main()
 {
 	int height;
-	cin >> height;
+	std::cin >> height;
 	for (int h = 0; h < height; h++)
 	{
 		for (int s = 0; s < (height - h); s++)
 		{
-			cout << " ";
+			std::cout << " ";
 		}
 		for (int ch = 0; ch <= h; ch++)
 		{
-			cout << "#";
+			std::cout << "#";
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 	return 0;
 }
