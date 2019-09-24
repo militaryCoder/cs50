@@ -60,6 +60,9 @@ int main()
 
         uint64_t cents = static_cast<uint64_t>(input * 100);
         
+        const uint32_t nominalsCount = 4;
+        const uint32_t coinsNominals[nominalsCount] = { 1, 5, 10, 25 };
+
         int totalCoins = 0;
         while (cents != 0)
         {
