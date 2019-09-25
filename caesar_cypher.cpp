@@ -25,18 +25,19 @@ int main(/* int argc, char** argv */)
         //const uint64_t cypherShiftKey = (uint64_t)argv[CYPHER_SHIFT_KEY_ARGUMENT_INDEX];
 
 		uint32_t cypherShiftKey;
-		std::cout << "1";
+		
 		std::cin >> cypherShiftKey;
+        std::cout << "1" << std::endl;
 
         std::string inputString;
-        std::cout << "2";
         std::getline(std::cin, inputString);
+        std::cout << "2" << std::endl;
         
         std::regex inputTemplate("(\\w)+");
         
         if (std::regex_match(inputString, inputTemplate))
         {
-        	std::string outputString[inputString.size()];
+        	std::string outputString;
         
         	for (size_t i = 0; i < inputString.size(); i++)
         	{
