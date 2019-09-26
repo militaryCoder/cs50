@@ -1,8 +1,6 @@
 #include <exception>
 #include <iostream>
 
-const uint8_t ALPHABET_LENGTH = 26;
-
 uint8_t calculateShiftedLetterPosition(uint8_t letter, uint32_t shiftKey)
 {
     if (('A' <= letter && 'Z' >= letter) ||
@@ -12,9 +10,8 @@ uint8_t calculateShiftedLetterPosition(uint8_t letter, uint32_t shiftKey)
 
         const uint8_t classicLetterAlphabeticPosition = letter - alphabetASCIIStarterPosition;
         const uint8_t shiftedLetterPosition = (classicLetterAlphabeticPosition + shiftKey) % 26;
-        const uint8_t finalLetterPosition = shiftedLetterPosition + alphabetASCIIStarterPosition;
 
-        return finalLetterPosition;
+        return (shiftedLetterPosition + alphabetASCIIStarterPosition);
     }
     else
     {
@@ -26,7 +23,6 @@ int main()
 {
     const uint32_t shift = 2;
     
-
     try
     {
         char letter;
