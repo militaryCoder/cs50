@@ -13,7 +13,7 @@ uint8_t calculateCypheredLetterPosition(uint8_t letter, uint32_t key)
     return (((letter - ALPHABET_ASCII_STARTING_POSITION) + key) % ALPHABET_LENGTH) + ALPHABET_ASCII_STARTING_POSITION;
 }
 
-//Uncomment main() to use feature from line 25
+//Uncomment main() parameters to use feature from line 25
 int main(/* int argc, char** argv */)
 {
     try
