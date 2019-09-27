@@ -1,7 +1,7 @@
 #include <exception>
 #include <iostream>
 
-uint8_t calculateShiftedLetterPosition(uint8_t letter, uint32_t shiftKey)
+uint8_t calculateEncryptedLetterPosition(uint8_t letter, uint32_t shiftKey)
 {
     if (('A' <= letter && 'Z' >= letter) ||
         ('a' <= letter && 'z' >= letter))
@@ -27,7 +27,7 @@ int main()
     {
         char letter;
         std::cin >> letter;
-        char finalCharacter = calculateShiftedLetterPosition(letter, shift);
+        char finalCharacter = calculateEncryptedLetterPosition(letter, shift);
         std::cout << finalCharacter << std::endl;
     }
     catch (const std::invalid_argument& e)
