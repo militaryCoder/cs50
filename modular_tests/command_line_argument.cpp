@@ -1,10 +1,13 @@
 #include <iostream>
 
-int main(int argc, char** argv)
+const uint8_t COMMAND_LINE_ARGUMENT_INDEX = 1;
+
+int main(int argc, char *argv[])
 {
-	if (argv[1])
+	if (NULL != argv[1])
 	{
 		std::cout << argv[1] << std::endl;
 	}
+	
 	return 0;
 }
