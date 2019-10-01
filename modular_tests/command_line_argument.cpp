@@ -4,9 +4,10 @@ const uint8_t COMMAND_LINE_ARGUMENT_INDEX = 1;
 
 int main(int argc, char *argv[])
 {
-    if (NULL != argv[1])
+    uint32_t argument = *argv[1];
+    if (NULL != argument)
     {
-        std::cout << argv[1] << std::endl;
+        std::cout << argument << std::endl;
     }
 
     return 0;
