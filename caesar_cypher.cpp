@@ -5,53 +5,57 @@
  
 const uint8_t CYPHER_SHIFT_KEY_ARGUMENT_INDEX = 1;
 
-const uint8_t ALPHABET_ASCII_STARTING_POSITION = 'A' - 1;
-const uint8_t ALPHABET_LENGTH = 26;
-
-uint8_t calculateEncryptedLetterPosition(uint8_t letter, uint32_t key)
+uint8_t calculateEncryptedLetterPosition(uint8_t letter, uint32_t shiftKey)
 {
-    const uint8_t classicLetterAlphabeticPosition = letter - ALPHABET_ASCII_STARTING_POSITION;
-    return (((letter - ALPHABET_ASCII_STARTING_POSITION) + key) % ALPHABET_LENGTH) + ALPHABET_ASCII_STARTING_POSITION;
+    if (('A' <= letter && 'Z' >= letter) ||
+        ('a' <= letter && 'z' >= letter))
+    {
+        const uint8_t alphabetASCIIStarterPosition = ('Z' >= letter) ? ('A' - 1) : ('a' - 1);
+
+        const uint8_t classicLetterAlphabeticPosition = letter - alphabetASCIIStarterPosition;
+        const uint8_t shiftedLetterPosition = (classicLetterAlphabeticPosition + shiftKey) % 26;
+
+        return (shiftedLetterPosition + alphabetASCIIStarterPosition);
+    }
+    else
+    {
+        throw std::invalid_argument("Invalid character provided");
+    }
 }
 
-//Uncomment main() parameters to use feature from line 25
-int main(/* int argc, char** argv */)
+int main(int argc, char* argv[])
 {
     try
     {
-    	/*
-    	Taking cypher key value directly from command line program execution arguments
-    	Does not work on mobile devices
-    	*/
-        //const uint64_t cypherShiftKey = (uint64_t)argv[CYPHER_SHIFT_KEY_ARGUMENT_INDEX];
-
-		uint32_t cypherShiftKey = 2;
-		
-		//std::cin >> cypherShiftKey;
-        std::cout << "1" << std::endl;
-
-        std::string inputString;
-        std::getline(std::cin, inputString);
-        std::cout << "2" << std::endl;
-        
-        std::regex inputTemplate("(\\w)+");
-        
-        if (std::regex_match(inputString, inputTemplate))
+	if (argc < 2)
         {
-        	std::string outputString;
-        
-        	for (size_t i = 0; i < inputString.size(); i++)
-        	{
-                std::cout << "Got character: [" << inputString[i] << "]\n";
-            	outputString[i] = (char)calculateEncryptedLetterPosition(inputString[i], cypherShiftKey);
-                std::cout << "Cyphered character: [" << outputString[i] << "]\n";
-        	}
-        	std::cout << outputString << std::endl;
+            throw std::invalid_argument("No cypher key provided");
+        }
+        const uint32_t commandLineAgrument = (uint32_t)*argv[CYPHER_SHIFT_KEY_ARGUMENT_INDEX];
+
+        if (0 != commandLineAgrument)
+        {
+            const uint32_t cypherShiftKey = commandLineAgrument - '0';
+            std::cout << "Cypher key: " << cypherShiftKey << std::endl;
+
+            std::string inputString;
+            std::getline(std::cin, inputString);
+            std::cout << inputString.size();
+
+            char outputString[inputString.size()];
+
+            for (size_t i = 0; i < inputString.size(); i++)
+            {
+                outputString[i] = (char)calculateEncryptedLetterPosition((uint8_t)inputString[i], cypherShiftKey);
+            }
+            std::cout << outputString << std::endl;
         }
         else
         {
-        	throw std::invalid_argument("Entered string that did not matched the template");
+            throw std::invalid_argument("No cypher key provided");
         }
+        
+        
     }
     catch (const std::invalid_argument& exc)
     {
