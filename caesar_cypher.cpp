@@ -7,6 +7,11 @@ const uint8_t CYPHER_SHIFT_KEY_ARGUMENT_INDEX = 1;
 
 uint8_t calculateEncryptedLetterPosition(uint8_t letter, uint32_t shiftKey)
 {
+    if (' ' == letter)
+    {
+        return (uint8_t)letter;
+    }
+
     if (('A' <= letter && 'Z' >= letter) ||
         ('a' <= letter && 'z' >= letter))
     {
@@ -41,11 +46,15 @@ int main(int argc, char* argv[])
             std::string inputString;
             std::getline(std::cin, inputString);
 
-            char outputString[inputString.size() + 1];
+            const uint32_t outputStringLength = inputString.size() + 1;
+
+            char *outputString = new char[outputStringLength];
+
             for (size_t i = 0; i < inputString.size(); i++)
             {
                 outputString[i] = (char)calculateEncryptedLetterPosition((uint8_t)inputString[i], cypherShiftKey);
             }
+            
             outputString[inputString.size()] = '\0';
             std::cout << outputString << std::endl;
         }
