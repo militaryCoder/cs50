@@ -31,11 +31,11 @@ int main(int argc, char* argv[])
         {
             throw std::invalid_argument("No cypher key provided");
         }
-        const uint32_t commandLineAgrument = (uint32_t)*argv[CYPHER_SHIFT_KEY_ARGUMENT_INDEX];
+        const uint32_t commandLineArgument = (uint32_t)*argv[CYPHER_SHIFT_KEY_ARGUMENT_INDEX];
 
-        if (0 != commandLineAgrument)
+        if (0 != commandLineArgument)
         {
-            const uint32_t cypherShiftKey = commandLineAgrument - '0';
+            const uint32_t cypherShiftKey = commandLineArgument - '0';
             std::cout << "Cypher key: " << cypherShiftKey << std::endl;
 
             std::string inputString;
