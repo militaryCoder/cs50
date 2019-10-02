@@ -42,10 +42,12 @@ int main(int argc, char* argv[])
             std::getline(std::cin, inputString);
 
             char outputString[inputString.size() + 1];
+
             for (size_t i = 0; i < inputString.size(); i++)
             {
                 outputString[i] = (char)calculateEncryptedLetterPosition((uint8_t)inputString[i], cypherShiftKey);
             }
+            
             outputString[inputString.size()] = '\0';
             std::cout << outputString << std::endl;
         }
