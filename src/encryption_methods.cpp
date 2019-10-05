@@ -2,10 +2,9 @@
 
 #include <stdexcept>
 
-
 uint8_t calculateEncryptedLetterPosition(uint8_t letter, uint32_t shiftKey)
 {
-    const uint8_t alphabetLength = 26;
+    const uint8_t alphabetLength = 26u;
     const uint8_t space = ' ';
 
     if (space == letter)
