@@ -29,7 +29,7 @@ int main()
         }
         uint8_t keywordCurrentCharacterIndex = (i - spaceCount) % keywordLength;
 
-        outputString[i] = calculateEncryptedLetterPosition(static_cast<uint8_t>(inputString[i]), keywordCurrentCharacterIndex);
+        outputString[i] = calculateEncryptedLetterPosition(static_cast<uint8_t>(inputString[i]), keyword[keywordCurrentCharacterIndex]);
     }
 
     return 0;
