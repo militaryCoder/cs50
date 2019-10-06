@@ -12,7 +12,7 @@ int main()
         {
             if (character == inputName[i])
             {
-                std::cout << (char)character;
+                std::cout << static_cast<char>(character);
             }
         }
     }
