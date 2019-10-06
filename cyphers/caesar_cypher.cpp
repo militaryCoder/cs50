@@ -1,4 +1,4 @@
-#include "../../include/encryption_methods.hpp"
+#include "encryption_methods.hpp"
 
 #include <cstring>
 #include <exception>
@@ -25,17 +25,16 @@ int main(int argc, char** argv)
 
             std::string inputString;
             std::getline(std::cin, inputString);
+            const size_t inputStringSize = inputString.size();
 
-            const uint32_t outputStringLength = inputString.size() + 1;
+            char *outputString = new char[inputStringSize + 1];
 
-            char *outputString = new char[outputStringLength];
-
-            for (size_t i = 0; i < inputString.size(); i++)
+            for (size_t i = 0; i < inputStringSize; i++)
             {
                 outputString[i] = static_cast<char>(calculateEncryptedLetterPosition(static_cast<uint8_t>(inputString[i]), cypherShiftKey));
             }
             
-            outputString[inputString.size()] = '\0';
+            outputString[inputStringSize] = '\0';
             std::cout << outputString << std::endl;
         }
         else

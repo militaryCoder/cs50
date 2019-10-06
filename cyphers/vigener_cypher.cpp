@@ -1,4 +1,4 @@
-#include "../../include/encryption_methods.hpp"
+#include "../encryption_methods/include/encryption_methods.hpp"
 
 #include <cstring>
 #include <iostream>
