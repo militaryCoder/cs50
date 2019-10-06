@@ -47,17 +47,16 @@ int main(int argc, char** argv)
 
             std::string inputString;
             std::getline(std::cin, inputString);
+            const size_t inputStringLength = inputString.size();
 
-            const uint32_t outputStringLength = inputString.size() + 1;
+            char *outputString = new char[inputStringLength];
 
-            char *outputString = new char[outputStringLength];
-
-            for (size_t i = 0; i < inputString.size(); i++)
+            for (size_t i = 0; i < inputStringLength; i++)
             {
                 outputString[i] = static_cast<char>(calculateEncryptedLetterPosition(static_cast<uint8_t>(inputString[i]), cypherShiftKey));
             }
             
-            outputString[inputString.size()] = '\0';
+            outputString[inputStringLength] = '\0';
             std::cout << outputString << std::endl;
         }
         else
