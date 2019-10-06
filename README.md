@@ -13,4 +13,3 @@ cmake ..
 cmake --build .
 sudo cmake--build . --target install
 ```
-- after finishing building, just type in the terminal `./<your_binary_file_name>` to start the program
