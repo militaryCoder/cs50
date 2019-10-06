@@ -3,7 +3,7 @@
 int main()
 {
 	std::cout << "waterminutes: ";
-	int waterminutes;
+	uint32_t waterminutes;
 
 	std::cin >> waterminutes;
 
