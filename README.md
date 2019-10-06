@@ -11,5 +11,4 @@ mkdir build
 build
 cmake ..
 cmake --build .
-sudo cmake--build . --target install
 ```
