@@ -13,6 +13,10 @@ add_executable(caesar_cypher "cyphers/caesar_cypher.cpp")
 target_link_libraries(caesar_cypher encryption_methods)
 
 add_executable(bottles "quests/bottles.cpp")
+
 add_executable(greedy "quests/greedy.cpp")
+target_compile_features(greedy PUBLIC cxx_std_17)
+
 add_executable(initials "quests/initials.cpp")
+
 add_executable(mario_pyramide "quests/mario_pyramide.cpp")
