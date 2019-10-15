@@ -30,7 +30,7 @@ double parseFloat(const std::string &buffer)
     const size_t dotIndex = buffer.find('.');
     const size_t integerPartEndIndex = (std::string::npos == dotIndex) ? buffer.size() : dotIndex;
 
-    for (int i = 0; i < integerPartEndIndex; i++)
+    for (size_t i = 0; i < integerPartEndIndex; i++)
     {
         finalValue += charToInteger(buffer[i]) * pow(DECIMAL_POWER_BASE, dotIndex - (i + 1));
     }
@@ -67,14 +67,14 @@ int main()
         while (cents != 0)
         {
             uint32_t numberOfCoins = cents / coinsNominals[0];
-            uint32_t currentCoinIndex = 0;
+            uint8_t currentCoinIndex = 0;
 
-            for (size_t c = 1; c < nominalsCount; c++)
+            for (uint32_t c = 1; c < nominalsCount; c++)
             {
                 const uint32_t numberOfNominatedCoins = cents / coinsNominals[c];
 
-                if ((numberOfNominatedCoins) < numberOfCoins &&
-                    (numberOfNominatedCoins) > 0)
+                if ((numberOfNominatedCoins < numberOfCoins) &&
+                    (numberOfNominatedCoins > 0))
                 {
                     numberOfCoins = numberOfNominatedCoins;
                     currentCoinIndex = static_cast<uint32_t>(c);

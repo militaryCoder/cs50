@@ -1,18 +1,23 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0)
 
 project(cs50)
 
-add_executable(bottles bottles.cpp)
-target_compile_options(bottles PUBLIC cxx_std_17)
+add_subdirectory(encryption_methods)
 
-add_executable(caesar_cypher caesar_cypher.cpp)
-target_compile_options(caesar_cypher PUBLIC cxx_std_17)
+include_directories("encryption_methods/include")
 
-add_executable(greedy greedy.cpp)
-target_compile_options(greedy PUBLIC cxx_std_17)
+add_executable(vigener_cypher "cyphers/vigener_cypher.cpp")
+target_link_libraries(vigener_cypher encryption_methods)
 
-add_executable(initials initials.cpp)
-target_compile_options(initials PUBLIC cxx_std_17)
+add_executable(caesar_cypher "cyphers/caesar_cypher.cpp")
+target_link_libraries(caesar_cypher encryption_methods)
 
-add_executable(mario_pyramide mario_pyramide.cpp)
-target_compile_options(mario_pyramide PUBLIC cxx_std_17)
+add_executable(bottles "quests/bottles.cpp")
+
+add_executable(greedy "quests/greedy.cpp")
+target_compile_features(greedy PUBLIC cxx_std_17)
+
+add_executable(initials "quests/initials.cpp")
+
+add_executable(mario_pyramide "quests/mario_pyramide.cpp")
+target_compile_features(mario_pyramide PUBLIC cxx_std_17)
