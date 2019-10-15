@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
+project(cs50)
 
 add_executable(bottles bottles.cpp)
 target_compile_options(bottles PUBLIC cxx_std_17)
