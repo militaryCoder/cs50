@@ -1,8 +1,9 @@
 #include "encryption_methods.hpp"
+#include "character_utilities.hpp"
 
 #include <stdexcept>
 
-uint8_t calculateEncryptedLetterPosition(uint8_t letter, uint32_t shiftKey)
+uint8_t encr_methods::calculateEncryptedLetterPosition(uint8_t letter, uint32_t shiftKey)
 {
     const uint8_t alphabetLength = 26u;
     const uint8_t space = ' ';
@@ -12,8 +13,7 @@ uint8_t calculateEncryptedLetterPosition(uint8_t letter, uint32_t shiftKey)
         return letter;
     }
 
-    if (('A' <= letter && 'Z' >= letter) ||
-        ('a' <= letter && 'z' >= letter))
+    if (charutils::isLetter(letter))
     {
         const uint8_t alphabetASCIIStarterPosition = ('Z' >= letter) ? ('A' - 1) : ('a' - 1);
 
