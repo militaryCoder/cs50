@@ -8,7 +8,7 @@ To get all binary files, follow this instruction:
 - in the root directory type this commands:
 ```shell
 mkdir build
-build
+cd build
 cmake ..
 cmake --build .
 ```
