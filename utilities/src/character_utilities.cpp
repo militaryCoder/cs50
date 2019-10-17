@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 
-inline bool charutils::isLetter(uint8_t character)
+bool charutils::isLetter(uint8_t character)
 {
     if (('A' <= character && 'Z' >= character) ||
         ('a' <= character && 'z' >= character))
@@ -14,7 +14,7 @@ inline bool charutils::isLetter(uint8_t character)
     return false;
 }
 
-inline bool charutils::isUpperCase(uint8_t character)
+bool charutils::isUpperCase(uint8_t character)
 {
     try
     {
@@ -36,7 +36,7 @@ inline bool charutils::isUpperCase(uint8_t character)
     return false;
 }
 
-inline bool charutils::isDownCase(uint8_t character)
+bool charutils::isLowerCase(uint8_t character)
 {
     try
     {
