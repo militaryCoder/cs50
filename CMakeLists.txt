@@ -19,5 +19,25 @@ target_compile_features(greedy PUBLIC cxx_std_17)
 
 add_executable(initials "quests/initials.cpp")
 
-add_executable(mario_pyramide "quests/mario_pyramide.cpp")
-target_compile_features(mario_pyramide PUBLIC cxx_std_17)
+
+add_executable(
+    initials
+    quests/initials.cpp
+)
+
+
+add_executable(
+    mario_pyramide
+    quests/mario_pyramide.cpp
+)
+target_compile_features(
+    mario_pyramide
+    PUBLIC cxx_std_17
+)
+
+set(targets vigener_cypher caesar_cypher bottles greedy initials mario_pyramide)
+
+install(
+    TARGETS ${targets}
+    DESTINATION bin
+)
