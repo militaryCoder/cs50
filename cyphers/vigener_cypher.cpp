@@ -9,28 +9,31 @@ int main()
     std::string keyword;
 
     std::cout << "Enter string to be encrypted: ";
-    std::cin >> inputString;
+    std::getline(std::cin, inputString);
     std::cout << "Enter keyword: ";
-    std::cin >> keyword;
+    std::getline(std::cin, keyword);
     
-    const uint8_t inputStringLength = inputString.size();
+    const size_t inputStringLength = inputString.size();
     char *outputString = new char[inputStringLength];
 
     const char space = ' ';
-    const uint32_t keywordLength = keyword.size();
+    const size_t keywordLength = keyword.size();
 
-    uint8_t spaceCount = 0;
+    uint32_t spaceCount = 0;
 
     for (size_t i = 0; i < inputStringLength; i++)
     {
         if (space == inputString[i])
         {
-            ++spaceCount;
+            spaceCount++;
         }
-        uint8_t keywordCurrentCharacterIndex = (i - spaceCount) % keywordLength;
+        uint32_t keywordCurrentCharacterIndex = (i - spaceCount) % keywordLength;
 
-        outputString[i] = calculateEncryptedLetterPosition(static_cast<uint8_t>(inputString[i]), keyword[keywordCurrentCharacterIndex]);
+        const uint32_t shiftValue = static_cast<uint32_t>(keyword[keywordCurrentCharacterIndex]);
+
+        outputString[i] = encr_methods::calculateEncryptedLetterPosition(static_cast<uint8_t>(inputString[i]), shiftValue);
     }
 
+    std::cout << outputString << std::endl;
     return 0;
 }
