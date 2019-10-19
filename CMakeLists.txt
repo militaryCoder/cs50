@@ -69,5 +69,5 @@ set(targets vigener_cypher caesar_cypher bottles greedy initials mario_pyramide)
 
 install(
     TARGETS ${targets}
-    DESTINATION bin
+    DESTINATION ${CMAKE_SOURCE_DIR}/bin
 )
