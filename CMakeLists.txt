@@ -65,7 +65,21 @@ target_compile_features(
     PUBLIC cxx_std_17
 )
 
-set(targets vigener_cypher caesar_cypher bottles greedy initials mario_pyramide)
+
+add_executable(
+    binary_search
+    sorts/binary_search.cpp
+)
+
+set(targets
+    vigener_cypher
+    caesar_cypher
+    bottles
+    greedy
+    initials
+    mario_pyramide
+    binary_search
+)
 
 install(
     TARGETS ${targets}
