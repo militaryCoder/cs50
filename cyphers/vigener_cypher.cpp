@@ -27,7 +27,7 @@ int main()
         {
             spaceCount++;
         }
-        uint32_t keywordCurrentCharacterIndex = (i - spaceCount) % keywordLength;
+        uint64_t keywordCurrentCharacterIndex = (i - spaceCount) % keywordLength;
 
         const uint32_t shiftValue = static_cast<uint32_t>(keyword[keywordCurrentCharacterIndex]);
 
