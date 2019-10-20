@@ -1,12 +1,13 @@
 #include <fstream>
 #include <iostream>
 
-const uint32_t binarySearch(const int32_t value, const int32_t *array, const uint32_t min, const uint32_t max) {
+const int32_t binarySearch(const int32_t value, const int32_t *array, const uint32_t min, const uint32_t max) {
     if (max <= min) {
         throw std::invalid_argument("Max point less or equal than min point");
     }
 
     uint32_t midPoint = (max - min) / 2;
+    
     if (value == array[midPoint]) {
         return midPoint;
     }
@@ -19,23 +20,28 @@ const uint32_t binarySearch(const int32_t value, const int32_t *array, const uin
     else {
         return midPoint;
     }
+
+    return - 1;
 }
 
 int main() {
-    std::ifstream input("input.txt");
-    int32_t *inputArray = new int32_t;
-
-    int i = 0;
-    while (input >> inputArray[i]) {
-        i++;
-    }
-
-    int32_t inputValue;
-    std::cin >> inputValue;
-
-    uint32_t inputValuePosition = 0;
-
+    int32_t inputValuePosition = 0;
+    
     try {
+        std::ifstream input("input.txt");
+        if (!input.good()) {
+            throw std::exception("File error occured");
+        }
+        int32_t *inputArray = new int32_t;
+
+        int i = 0;
+        while (input >> inputArray[i]) {
+            i++;
+        }
+
+        int32_t inputValue;
+        std::cin >> inputValue;
+
         inputValuePosition = binarySearch(inputValue, inputArray, 0, i + 1);
     } catch (std::invalid_argument &exc) {
         std::cerr << exc.what() << std::endl;
