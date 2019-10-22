@@ -7,25 +7,25 @@ const int32_t binarySearch(const int32_t value, const std::vector<int32_t> vecto
         throw std::invalid_argument("Given argument [size] is invalid - cannot be less than minimal treshold");
     }
 
-    uint32_t midPoint = size / 2;
-    std::cout << "Starting at position [" << midPoint << "]\n";
+    uint32_t currentAccessIndex = size / 2;
+    std::cout << "Starting at position [" << currentAccessIndex << "]\n";
     
-    while (vector[midPoint] != value) {
-        const int32_t accessedValue = vector[midPoint];
-        std::cout << "Accessed value [" << accessedValue << "] at index [" << midPoint << "]\n";
+    while (vector[currentAccessIndex] != value) {
+        const int32_t accessedValue = vector[currentAccessIndex];
+        std::cout << "Accessed value [" << accessedValue << "] at index [" << currentAccessIndex << "]\n";
         if (value > accessedValue) {
-            midPoint = midPoint + ((size - midPoint) / 2);
+            currentAccessIndex = currentAccessIndex + ((size - currentAccessIndex) / 2);
         }
         else if (value < accessedValue) {
-            midPoint = midPoint - ((1 == midPoint) ? 1 : midPoint / 2);
+            currentAccessIndex = currentAccessIndex - ((1 == currentAccessIndex) ? 1 : currentAccessIndex / 2);
         }
     }
     
-    return midPoint;
+    return currentAccessIndex;
 }
 
 int main() {
-    int32_t inputValuePosition = 0;
+    int32_t inputValueIndex = 0;
     
     try {
         std::ifstream input("input.txt");
@@ -40,12 +40,12 @@ int main() {
         int32_t inputValue;
         std::cin >> inputValue;
 
-        inputValuePosition = binarySearch(inputValue, inputVector, inputVector.size());
+        inputValueIndex = binarySearch(inputValue, inputVector, inputVector.size());
     } catch (std::invalid_argument &exc) {
         std::cerr << exc.what() << std::endl;
     }
 
-    std::cout << inputValuePosition << std::endl;
+    std::cout << inputValueIndex << std::endl;
 
     return 0;
 }
