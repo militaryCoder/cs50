@@ -8,33 +8,20 @@ const int32_t binarySearch(const int32_t value, const std::vector<int32_t> vecto
     }
 
     uint32_t midPoint = size / 2;
+    std::cout << "Starting at position [" << midPoint << "]\n";
     
     while (vector[midPoint] != value) {
         const int32_t accessedValue = vector[midPoint];
+        std::cout << "Accessed value [" << accessedValue << "] at index [" << midPoint << "]\n";
         if (value > accessedValue) {
             midPoint = midPoint + ((size - midPoint) / 2);
         }
         else if (value < accessedValue) {
-            midPoint = midPoint - midPoint / 2;
+            midPoint = midPoint - ((1 == midPoint) ? 1 : midPoint / 2);
         }
     }
     
     return midPoint;
-    
-//    if (value == array[midPoint]) {
-//        return midPoint;
-//    }
-//    else if (value > array[midPoint]) {
-//        binarySearch(value, array, midPoint + 1, max);
-//    }
-//    else if (value < array[midPoint]) {
-//        binarySearch(value, array, min, midPoint + 1);
-//    }
-//    else {
-//        return midPoint;
-//    }
-
-//    return - 1;
 }
 
 int main() {
