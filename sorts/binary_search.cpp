@@ -1,27 +1,40 @@
 #include <fstream>
 #include <iostream>
+#include <vector>
 
-const int32_t binarySearch(const int32_t value, const int32_t *array, const uint32_t min, const uint32_t max) {
-    if (max <= min) {
-        throw std::invalid_argument("Max point less or equal than min point");
+const int32_t binarySearch(const int32_t value, const std::vector<int32_t> vector, const size_t size) {
+    if (size < 0) {
+        throw std::invalid_argument("Given argument [size] is invalid - cannot be less than minimal treshold");
     }
 
-    uint32_t midPoint = (max - min) / 2;
+    uint32_t midPoint = size / 2;
     
-    if (value == array[midPoint]) {
-        return midPoint;
+    while (vector[midPoint] != value) {
+        const int32_t accessedValue = vector[midPoint];
+        if (value > accessedValue) {
+            midPoint = midPoint + ((size - midPoint) / 2);
+        }
+        else if (value < accessedValue) {
+            midPoint = midPoint - midPoint / 2;
+        }
     }
-    else if (value > array[midPoint]) {
-        binarySearch(value, array, midPoint + 1, max);
-    }
-    else if (value < array[midPoint]) {
-        binarySearch(value, array, min, midPoint + 1);
-    }
-    else {
-        return midPoint;
-    }
+    
+    return midPoint;
+    
+//    if (value == array[midPoint]) {
+//        return midPoint;
+//    }
+//    else if (value > array[midPoint]) {
+//        binarySearch(value, array, midPoint + 1, max);
+//    }
+//    else if (value < array[midPoint]) {
+//        binarySearch(value, array, min, midPoint + 1);
+//    }
+//    else {
+//        return midPoint;
+//    }
 
-    return - 1;
+//    return - 1;
 }
 
 int main() {
@@ -29,20 +42,18 @@ int main() {
     
     try {
         std::ifstream input("input.txt");
-        if (!input.good()) {
-            throw std::exception("File error occured");
-        }
-        int32_t *inputArray = new int32_t;
 
-        int i = 0;
-        while (input >> inputArray[i]) {
-            i++;
+        std::vector<int32_t> inputVector;
+
+        int32_t fstreamBuffer = 0;
+        while (input >> fstreamBuffer) {
+            inputVector.push_back(fstreamBuffer);
         }
 
         int32_t inputValue;
         std::cin >> inputValue;
 
-        inputValuePosition = binarySearch(inputValue, inputArray, 0, i + 1);
+        inputValuePosition = binarySearch(inputValue, inputVector, inputVector.size());
     } catch (std::invalid_argument &exc) {
         std::cerr << exc.what() << std::endl;
     }
