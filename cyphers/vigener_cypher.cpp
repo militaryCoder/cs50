@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     }
     catch (const std::invalid_argument &exc)
     {
-        std::cout << exc.what() << std::endl;
+        std::cerr << exc.what() << std::endl;
     }
     
     return 0;
