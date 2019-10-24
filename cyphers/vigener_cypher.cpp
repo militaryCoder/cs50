@@ -12,28 +12,28 @@ int main(int argc, char **argv)
         {
             throw std::invalid_argument("Usage: ./vigener_cypher <message> <keyword>");
         }
-        const std::string inputString = argv[1];
+        const std::string inputMessage = argv[1];
         const std::string keyword = argv[2];
         
-        const size_t inputStringLength = inputString.size();
-        char *outputString = new char[inputStringLength];
+        const size_t inputMessageSize = inputMessage.size();
+        char *outputString = new char[inputMessageSize];
 
         const char space = ' ';
         const size_t keywordLength = keyword.size();
 
-        uint32_t spaceCount = 0;
+        uint32_t spacesNumber = 0;
 
-        for (size_t i = 0; i < inputStringLength; i++)
+        for (size_t i = 0; i < inputMessageSize; i++)
         {
-            if (space == inputString[i])
+            if (space == inputMessage[i])
             {
-                spaceCount++;
+                spacesNumber++;
             }
-            uint64_t keywordCurrentCharacterIndex = (i - spaceCount) % keywordLength;
+            uint64_t keywordCurrentCharacterIndex = (i - spacesNumber) % keywordLength;
 
             const uint32_t shiftValue = static_cast<uint32_t>(keyword[keywordCurrentCharacterIndex]);
 
-            outputString[i] = encr_methods::calculateEncryptedLetterPosition(static_cast<uint8_t>(inputString[i]), shiftValue);
+            outputString[i] = encr_methods::calculateEncryptedLetterPosition(static_cast<uint8_t>(inputMessage[i]), shiftValue);
         }
 
         std::cout << outputString << std::endl;
