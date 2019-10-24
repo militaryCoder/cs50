@@ -4,3 +4,5 @@
 /**/*.exe
 build
 temp
+*.txt
+!CMakeLists.txt
