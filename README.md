@@ -1,4 +1,4 @@
-# Solutions
+# Cs50 Course
 Here can be found tasks' solutions from Cs50 course.
 All solutions written using C++
 
