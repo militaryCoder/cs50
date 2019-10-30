@@ -1,37 +1,38 @@
 #include <fstream>
 #include <iostream>
+#include <iterator>
 #include <vector>
 
-const int32_t binarySearch(const int32_t value, const std::vector<int32_t> &vector, const size_t size) {
-    if (size < 0)
-    {
-        throw std::invalid_argument("Given argument [size] is invalid - cannot be less than minimal treshold");
-    }
-
-    uint32_t currentAccessIndex = size / 2;
-    std::cout << "Starting at position [" << currentAccessIndex << "]\n";
+template<typename DataType, class DataStructure>
+const uint32_t binarySearch(const DataType value, const DataStructure &structure)
+{
+    auto currentAccessIterator = structure.cbegin();
     
-    while (vector[currentAccessIndex] != value)
+    
+    // Moves iterator given it by n elements
+    std::advance(currentAccessIterator,
+                 structure.size() / 2);
+    
+    while (*currentAccessIterator != value)
     {
-        const int32_t accessedValue = vector[currentAccessIndex];
-        std::cout << "Accessed value [" << accessedValue << "] at index [" << currentAccessIndex << "]\n";
+        const DataType accessedValue = *currentAccessIterator;
+
         if (value > accessedValue)
         {
-            currentAccessIndex = currentAccessIndex + ((size - currentAccessIndex) / 2);
+            std::advance(currentAccessIterator,
+                         (structure.size() - *currentAccessIterator) / 2);
         }
         else if (value < accessedValue)
         {
-            currentAccessIndex = currentAccessIndex - ((1 == currentAccessIndex) ? 1 : currentAccessIndex / 2);
+            currentAccessIterator = ((structure.cbegin() + 1 == currentAccessIterator) ? structure.cbegin() : currentAccessIterator / 2);
         }
     }
     
-    return currentAccessIndex;
+    return currentAccessIterator;
 }
 
 int main(int argc, char **argv)
 {
-    int32_t inputValueIndex = 0;
-    
     try
     {
         if (argc < 3)
@@ -53,14 +54,14 @@ int main(int argc, char **argv)
             inputVector.push_back(fstreamBuffer);
         }
 
-        inputValueIndex = binarySearch(inputValue, inputVector, inputVector.size());
+        const uint32_t inputValueIndex = binarySearch(inputValue, inputVector);
+        
+        std::cout << inputValueIndex << std::endl;
     }
     catch (std::invalid_argument &exc)
     {
         std::cerr << exc.what() << std::endl;
     }
-
-    std::cout << inputValueIndex << std::endl;
 
     return 0;
 }
