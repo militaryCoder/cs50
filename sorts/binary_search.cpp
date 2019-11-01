@@ -3,10 +3,10 @@
 #include <iterator>
 #include <vector>
 
-template<typename DataType, class DataStructure>
-const uint32_t binarySearch(const DataType value, const DataStructure &structure)
+template<class DataType, class DataStructure>
+const DataStructure::iterator binarySearch(const DataStructure &structure, const DataType value)
 {
-    auto currentAccessIterator = structure.cbegin();
+    DataStructure::iterator currentAccessIterator = structure.cbegin();
     
     
     // Moves iterator given it by n elements
@@ -20,11 +20,13 @@ const uint32_t binarySearch(const DataType value, const DataStructure &structure
         if (value > accessedValue)
         {
             std::advance(currentAccessIterator,
-                         (structure.size() - *currentAccessIterator) / 2);
+                         (structure.size() - (currentAccessIterator - structure.begin())) / 2);
         }
         else if (value < accessedValue)
         {
-            currentAccessIterator = ((structure.cbegin() + 1 == currentAccessIterator) ? structure.cbegin() : currentAccessIterator / 2);
+            currentAccessIterator = ((structure.cbegin() + 1 == currentAccessIterator)
+                                    ? structure.cbegin()
+                                    : (currentAccessIterator - structure.begin()) / 2);
         }
     }
     
@@ -54,9 +56,9 @@ int main(int argc, char **argv)
             inputVector.push_back(fstreamBuffer);
         }
 
-        const uint32_t inputValueIndex = binarySearch(inputValue, inputVector);
+        const std::vector<int32_t>::iterator inputValueIterator = binarySearch(inputValue, inputVector);
         
-        std::cout << inputValueIndex << std::endl;
+        std::cout << inputValueIterator - inputVector.cbegin() << std::endl;
     }
     catch (std::invalid_argument &exc)
     {
