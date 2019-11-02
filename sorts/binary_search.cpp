@@ -4,12 +4,10 @@
 #include <vector>
 
 template<class DataType, class DataStructure>
-const DataStructure::iterator binarySearch(const DataStructure &structure, const DataType value)
+const typename DataStructure::iterator binarySearch(const DataStructure &structure, const DataType value)
 {
-    DataStructure::iterator currentAccessIterator = structure.cbegin();
+    typename DataStructure::iterator currentAccessIterator = structure.cbegin();
     
-    
-    // Moves iterator given it by n elements
     std::advance(currentAccessIterator,
                  structure.size() / 2);
     
@@ -26,7 +24,7 @@ const DataStructure::iterator binarySearch(const DataStructure &structure, const
         {
             currentAccessIterator = ((structure.cbegin() + 1 == currentAccessIterator)
                                     ? structure.cbegin()
-                                    : (currentAccessIterator - structure.begin()) / 2);
+                                    : (currentAccessIterator - structure.cbegin()) / 2);
         }
     }
     
@@ -56,7 +54,7 @@ int main(int argc, char **argv)
             inputVector.push_back(fstreamBuffer);
         }
 
-        const std::vector<int32_t>::iterator inputValueIterator = binarySearch(inputValue, inputVector);
+        const std::vector<int32_t>::iterator inputValueIterator = binarySearch(inputVector, inputValue);
         
         std::cout << inputValueIterator - inputVector.cbegin() << std::endl;
     }
