@@ -1,11 +1,11 @@
 #include <iostream>
 #include <stdexcept>
 
-template<typename T>
+template<typename ValueType>
 struct Node
 {
     public:
-        Node(T value)
+        Node(ValueType value)
         : m_value(value) {}
 
         Node *parentNode;
@@ -50,13 +50,18 @@ struct Node
             return nullptr != childNodes[0];
         }
 
-        T getValue()
+        ValueType getValue()
         {
             return m_value;
         }
+
+        void setParent(Node parent)
+        {
+            parentNode = parent;
+        }
     
     private:
-        T m_value;
+        ValueType m_value;
 };
 
 
