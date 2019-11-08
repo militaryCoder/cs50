@@ -75,8 +75,3 @@ set(targets
     mario_pyramide
     binary_search
 )
-
-install(
-    TARGETS ${targets}
-    DESTINATION ${CMAKE_SOURCE_DIR}/bin
-)
