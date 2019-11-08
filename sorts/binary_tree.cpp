@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
 template<typename ValueType>
 struct Node
@@ -8,36 +9,35 @@ struct Node
         Node(ValueType value)
         : m_value(value) {}
 
-        Node *parentNode;
-        Node *childNodes[2] = {nullptr};
-
         bool isAnyChildren()
         {
             return ((nullptr != childNodes[0])) || (nullptr != childNodes[1]);
         }
 
-        void appendChild(Node child)
+        void appendChild(Node &child)
         {
             if (child.getValue() >= this->getValue() &&
-                !this->isGreaterChildExists())
+                !this->isGreaterChildExist())
             {
-                delete childNodes[1];
-                childNodes = nullptr;
-
-                childNodes[1] = &child;
+                assignChild(child, 1);
             }
             else if (child.getValue() < this->getValue() &&
-                     !this->isLowerChildExists())
+                     !this->isLowerChildExist())
             {
-                delete childNodes[0];
-                childNodes = nullptr;
-
-                childNodes[0] = &child;
+                assignChild(child, 0);
             }
             else
             {
                 throw std::exception();
             }
+        }
+
+        void assignChild(Node &child, size_t pos)
+        {
+            delete childNodes[pos];
+            childNodes[pos] = nullptr;
+
+            childNodes[pos] = &child;
         }
 
         bool isGreaterChildExist()
@@ -62,13 +62,23 @@ struct Node
     
     private:
         ValueType m_value;
+
+        Node *childNodes[2] = {nullptr};
+        Node *parentNode;
 };
 
-
+template<typename DataType>
 class BinaryTree
 {
     public:
+        BinaryTree(Node root)
+        : m_root(root) {}
 
+    private:
+        Node m_root;
+        Node *currentNode;
+
+        std::vector<Node> nodes;
 };
 
 int main()
@@ -78,7 +88,8 @@ int main()
     std::cout << node.isGreaterChildExist() << std::endl;
     std::cout << node.isLowerChildExist() << std::endl;
     std::cout << node.getValue() << std::endl;
-    node.appendChild(Node<int>(2));
+    Node<int> lowerChild(2);
+    node.appendChild(lowerChild);
     std::cout << node.isGreaterChildExist() << std::endl;
     std::cout << node.isLowerChildExist() << std::endl;
 
