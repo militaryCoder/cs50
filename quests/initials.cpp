@@ -6,7 +6,7 @@ int main()
     std::string inputName;
     std::getline(std::cin, inputName);
 
-    for (uint8_t i = 0; i < inputName.size(); i++)
+    for (size_t i = 0; i < inputName.size(); i++)
     {
         for (uint32_t character = 'A'; character <= 'Z'; character++)
         {
