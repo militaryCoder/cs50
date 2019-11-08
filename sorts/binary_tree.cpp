@@ -59,7 +59,17 @@ struct Node
         {
             parentNode = parent;
         }
-    
+
+        Node* lowerChildAdress()
+        {
+            return &childNodes[0];
+        }
+
+        Node* greaterChildAdress()
+        {
+            return &childNodes[1];
+        }
+
     private:
         ValueType m_value;
 
