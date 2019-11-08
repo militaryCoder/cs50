@@ -66,11 +66,6 @@ target_compile_features(
 )
 
 
-add_executable(
-    binary_search
-    sorts/binary_search.cpp
-)
-
 set(targets
     vigener_cypher
     caesar_cypher
