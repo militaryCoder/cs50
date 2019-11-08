@@ -1,5 +1,6 @@
 # Cs50 Course
 
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/militaryCoder/cs50.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/militaryCoder/cs50/context:cpp)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/militaryCoder/cs50.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/militaryCoder/cs50/alerts/)
 
 Here can be found tasks' solutions from Cs50 course.
