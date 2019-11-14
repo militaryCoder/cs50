@@ -31,7 +31,10 @@ int main(int argc, char** argv)
 
             for (size_t i = 0; i < inputStringSize; i++)
             {
-                outputString[i] = static_cast<char>(encr_methods::calculateEncryptedLetterPosition(static_cast<uint8_t>(inputString[i]), cypherShiftKey));
+                uint8_t inputCharacter = static_cast<uint8_t>(inputString[i]);
+		char encryptedLetter = static_cast<char>(encr_methods::calculateEncryptedLetterPosition(inputCharacter, cypherShiftKey);
+
+                outputString[i] = encryptedLetter;
             }
             
             outputString[inputStringSize] = '\0';
