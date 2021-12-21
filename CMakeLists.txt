@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 
 project(cs50)
 
@@ -39,14 +39,14 @@ add_executable(
     quests/bottles.cpp
 )
 
-
 add_executable(
     greedy
     quests/greedy.cpp
 )
-target_compile_features(
-    greedy
-    PUBLIC cxx_std_17
+set_target_properties(
+    greedy PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED TRUE
 )
 
 
@@ -55,23 +55,12 @@ add_executable(
     quests/initials.cpp
 )
 
-
 add_executable(
     mario_pyramide
     quests/mario_pyramide.cpp
 )
-target_compile_features(
-    mario_pyramide
-    PUBLIC cxx_std_17
-)
-
-
-set(targets
-    vigener_cypher
-    caesar_cypher
-    bottles
-    greedy
-    initials
-    mario_pyramide
-    binary_search
+set_target_properties(
+    mario_pyramide PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED TRUE
 )
